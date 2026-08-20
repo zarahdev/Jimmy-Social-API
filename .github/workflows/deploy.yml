@@ -1,0 +1,69 @@
+name: Deploy Jimmy Social to VPS
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # ------------------------------------------------------------------
+      # TRANSFERÊNCIA DE ARQUIVOS (RSYNC)
+      # ------------------------------------------------------------------
+      - name: Sync files to VPS
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_KEY }}
+          SSH_HOST: ${{ secrets.VPS_SSH_HOST }}
+          SSH_USER: ${{ secrets.VPS_SSH_USER }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          
+          ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST "mkdir -p /var/www/social"
+          
+          echo "Transferindo arquivos da aplicação..."
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no" --exclude '.git' --exclude 'node_modules' ./ $SSH_USER@$SSH_HOST:/var/www/social/
+
+      # ------------------------------------------------------------------
+      # CONFIGURAÇÃO DE AMBIENTE (ENV)
+      # ------------------------------------------------------------------
+      - name: Setup .env on VPS
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_KEY }}
+          SSH_HOST: ${{ secrets.VPS_SSH_HOST }}
+          SSH_USER: ${{ secrets.VPS_SSH_USER }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        run: |
+          ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST "
+            cd /var/www/social
+            
+            # Atualiza apenas as variáveis necessárias
+            echo 'JWT_SECRET=${JWT_SECRET}' > .env
+          "
+
+      # ------------------------------------------------------------------
+      # RESTART NO VPS COM DOCKER
+      # ------------------------------------------------------------------
+      - name: Build and Restart Docker Services
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_KEY }}
+          SSH_HOST: ${{ secrets.VPS_SSH_HOST }}
+          SSH_USER: ${{ secrets.VPS_SSH_USER }}
+        run: |
+          ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST "
+            cd /var/www/social
+            
+            # Derruba os containers antigos
+            docker-compose -f docker-compose.dev.yaml down || true
+            
+            # Reconstrói e levanta os containers com o novo código
+            docker-compose -f docker-compose.dev.yaml up -d --build
+          "
