@@ -32,7 +32,7 @@ import {
   TrustWalletAdapter,
   XDEFIWalletAdapter,
   TokenPocketWalletAdapter,
-} from '@Jimmy Social Api/wallets';
+} from '@postiz/wallets';
 import {
   WalletModalProvider,
   useWalletModal,

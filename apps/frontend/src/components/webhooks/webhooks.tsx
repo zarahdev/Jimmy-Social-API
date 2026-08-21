@@ -65,7 +65,7 @@ export const Webhooks: FC = () => {
       </h3>
       <div className="text-customColor18 mt-[4px]">
         {t(
-          'webhooks_are_a_way_to_get_notified_when_something_happens_in_Jimmy Social Api_via_an_http_request',
+          'webhooks_are_a_way_to_get_notified_when_something_happens_in_POSTIZ_via_an_http_request',
           'Webhooks are a way to get notified when something happens in Jimmy Social Api via\n        an HTTP request.'
         )}
       </div>

@@ -466,14 +466,14 @@ export const AddProviderComponent: FC<{
         };
         const gotoIntegration = async (externalUrl?: string) => {
           // Mobile WebView: reuse the existing `externalUrl` param to
-          // carry the `Jimmy Social Api://` deep link so the backend redirects
+          // carry the `postiz://` deep link so the backend redirects
           // back to the iOS/Android app after OAuth completes, instead
           // of the default web redirect.
           const params = [
             `externalUrl=${encodeURIComponent(externalUrl)}`,
             onboardingParam,
             isMobile
-              ? `redirectUrl=${encodeURIComponent('Jimmy Social Api://integrations')}`
+              ? `redirectUrl=${encodeURIComponent('postiz://integrations')}`
               : '',
           ]
             .filter(Boolean)
@@ -511,7 +511,7 @@ export const AddProviderComponent: FC<{
             // `window.open`/`location.href` aren't reliable here because
             // RN WebView doesn't always route them through the native
             // navigation intercept. The backend redirects back to the
-            // app via `Jimmy Social Api://` once OAuth completes.
+            // app via `postiz://` once OAuth completes.
             const rn = (window as any).ReactNativeWebView;
             if (rn && typeof rn.postMessage === 'function') {
               rn.postMessage(JSON.stringify({ type: 'open-external', url }));

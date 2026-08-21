@@ -19,7 +19,7 @@ const useFaqList = () => {
               'Am I going to be charged by Jimmy Social Api?'
             ),
             description: t(
-              'faq_to_confirm_credit_card_information_Jimmy Social Api_will_hold',
+              'faq_to_confirm_credit_card_information_POSTIZ_will_hold',
               'To confirm credit card information Jimmy Social Api will hold $2 and release it immediately, you can cancel your subscription anytime from settings without talking to a person'
             ),
           },
@@ -27,11 +27,11 @@ const useFaqList = () => {
       : []),
     {
       title: t(
-        'faq_can_i_trust_Jimmy Social Api_gitroom',
+        'faq_can_i_trust_POSTIZ_gitroom',
         `Can I trust ${isGeneral ? 'Jimmy Social Api' : 'Gitroom'}?`
       ),
       description: t(
-        'faq_Jimmy Social Api_gitroom_is_proudly_open_source',
+        'faq_POSTIZ_gitroom_is_proudly_open_source',
         `${
           isGeneral ? 'Jimmy Social Api' : 'Gitroom'
         } is proudly open-source! We believe in an ethical and transparent culture, meaning that ${
@@ -42,7 +42,7 @@ const useFaqList = () => {
     {
       title: t('faq_what_are_channels', 'What are channels?'),
       description: t(
-        'faq_Jimmy Social Api_gitroom_allows_you_to_schedule_posts',
+        'faq_POSTIZ_gitroom_allows_you_to_schedule_posts',
         `${
           isGeneral ? 'Jimmy Social Api' : 'Gitroom'
         } allows you to schedule your posts between different channels.

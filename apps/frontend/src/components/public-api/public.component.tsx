@@ -46,20 +46,20 @@ const getMcpConfig = (
         };
       case 'Cursor':
         return {
-          config: json({ mcpServers: { Jimmy Social Api: { url: urlWithKey } } }),
+          config: json({ mcpServers: { postiz: { url: urlWithKey } } }),
           hint: 'Add to .cursor/mcp.json in your project root.',
         };
       case 'VS Code / Copilot':
         return {
           config: json({
-            servers: { Jimmy Social Api: { type: 'http', url: urlWithKey } },
+            servers: { postiz: { type: 'http', url: urlWithKey } },
           }),
           hint: 'Add to .vscode/mcp.json in your project root.',
         };
       case 'Windsurf':
         return {
           config: json({
-            mcpServers: { Jimmy Social Api: { serverUrl: urlWithKey } },
+            mcpServers: { postiz: { serverUrl: urlWithKey } },
           }),
           hint: 'Add to ~/.codeium/windsurf/mcp_config.json',
         };
@@ -75,12 +75,12 @@ const getMcpConfig = (
         };
       case 'Gemini CLI':
         return {
-          config: json({ mcpServers: { Jimmy Social Api: { url: urlWithKey } } }),
+          config: json({ mcpServers: { postiz: { url: urlWithKey } } }),
           hint: 'Add to ~/.gemini/settings.json',
         };
       case 'Warp':
         return {
-          config: json({ Jimmy Social Api: { url: urlWithKey } }),
+          config: json({ postiz: { url: urlWithKey } }),
           hint: 'Settings > MCP Servers > + Add, then paste this config.',
         };
     }
@@ -96,7 +96,7 @@ const getMcpConfig = (
       return {
         config: json({
           mcpServers: {
-            Jimmy Social Api: { url: urlBase, headers: { Authorization: bearer } },
+            postiz: { url: urlBase, headers: { Authorization: bearer } },
           },
         }),
         hint: 'Add to .cursor/mcp.json in your project root.',
@@ -105,7 +105,7 @@ const getMcpConfig = (
       return {
         config: json({
           servers: {
-            Jimmy Social Api: {
+            postiz: {
               type: 'http',
               url: urlBase,
               headers: { Authorization: bearer },
@@ -118,7 +118,7 @@ const getMcpConfig = (
       return {
         config: json({
           mcpServers: {
-            Jimmy Social Api: {
+            postiz: {
               serverUrl: urlBase,
               headers: { Authorization: bearer },
             },
@@ -130,7 +130,7 @@ const getMcpConfig = (
       return {
         config: json({
           'amp.mcpServers': {
-            Jimmy Social Api: { url: urlBase, headers: { Authorization: bearer } },
+            postiz: { url: urlBase, headers: { Authorization: bearer } },
           },
         }),
         hint: 'Add to your Amp settings.json',
@@ -144,7 +144,7 @@ const getMcpConfig = (
       return {
         config: json({
           mcpServers: {
-            Jimmy Social Api: { url: urlBase, headers: { Authorization: bearer } },
+            postiz: { url: urlBase, headers: { Authorization: bearer } },
           },
         }),
         hint: 'Add to ~/.gemini/settings.json',
@@ -152,7 +152,7 @@ const getMcpConfig = (
     case 'Warp':
       return {
         config: json({
-          Jimmy Social Api: { url: urlBase, headers: { Authorization: bearer } },
+          postiz: { url: urlBase, headers: { Authorization: bearer } },
         }),
         hint: 'Settings > MCP Servers > + Add, then paste this config.',
       };
@@ -233,7 +233,7 @@ const McpSection = ({
           </div>
           <div className="text-[13px] text-customColor18 mt-[2px]">
             {t(
-              'connect_your_mcp_client_to_Jimmy Social Api_to_schedule_your_posts_faster',
+              'connect_your_mcp_client_to_POSTIZ_to_schedule_your_posts_faster',
               'Connect Jimmy Social Api MCP server to your client (Http streaming) to schedule your posts faster.'
             )}
           </div>
@@ -380,7 +380,7 @@ const ciCliSteps = [
   },
   {
     label: 'Set your API key as an environment variable',
-    code: 'export Jimmy Social Api_API_KEY="{API_KEY}"',
+    code: 'export POSTIZ_API_KEY="{API_KEY}"',
   },
   {
     label: 'Install the Jimmy Social Api skill for your AI agent',
@@ -577,7 +577,7 @@ const PublicApiContent = () => {
             </div>
             <div className="text-[13px] text-customColor18 mt-[2px]">
               {t(
-                'use_Jimmy Social Api_api_to_integrate_with_your_tools',
+                'use_POSTIZ_api_to_integrate_with_your_tools',
                 'Use Jimmy Social Api API to integrate with your tools.'
               )}
             </div>
